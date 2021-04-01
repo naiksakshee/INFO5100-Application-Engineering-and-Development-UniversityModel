@@ -109,7 +109,12 @@ public class MainClass {
                     
                     break;
                 case 3:
-                    System.out.println(patientDirectory.getPersonList().toString());
+                    ArrayList<Patient> patientList = patientDirectory.getPersonList();
+                    for (Patient p : patientList) {
+                        System.out.println(p.getPerson().getName());
+                    }
+  
+                
                     break;
                 case 4:
                     personDirectory.printList();
@@ -191,6 +196,7 @@ public class MainClass {
         System.out.println("*************Vital Sign Details*****************");
         System.out.println("************************************************");
         System.out.println("Enter patient's Age Group:  " );
+        in.nextLine(); 
         String patientAgeGroup = in.nextLine(); 
         System.out.println("Respiratory Rate: " );
         int patientRespiratoryRate; 
@@ -257,7 +263,7 @@ public class MainClass {
         System.out.println("\nTestcases running...");
         
         Address add7 = new Address("st6", "Community2", 1, "city1");
-        Person person7 = new Person("p6", 0, "female", add7);
+        Person person7 = new Person("Sejal Purohit", 0, "female", add7);
         VitalSigns newVS7 = new VitalSigns("NewBorn", 25, 130, 80, 2.5, 6);
         PatientEncounter encounter7 = new PatientEncounter();
         PatientEncounterHistory eh7 = new PatientEncounterHistory();
@@ -275,7 +281,7 @@ public class MainClass {
 
 
         Address add8 = new Address("st8", "Community2", 1, "city1");
-        Person person8 = new Person("p8", 0, "female", add8);
+        Person person8 = new Person("Malavika Krishnan", 0, "female", add8);
         VitalSigns newVS8 = new VitalSigns("Infant", 25, 100, 60, 4.5, 18);
         PatientEncounter encounter8 = new PatientEncounter();
         PatientEncounterHistory eh8 = new PatientEncounterHistory();
@@ -292,7 +298,7 @@ public class MainClass {
         eh8.addEncounter(encounter8);
 
         Address add9 = new Address("st9", "Community2", 2, "city1");
-        Person person9 = new Person("p9", 0, "female", add9);
+        Person person9 = new Person("Nikita Patil", 0, "female", add9);
         VitalSigns newVS9 = new VitalSigns("Toddler", 27, 100, 130, 12, 26);
         PatientEncounter encounter9 = new PatientEncounter();
         PatientEncounterHistory eh9 = new PatientEncounterHistory();
@@ -311,7 +317,7 @@ public class MainClass {
         eh9.addEncounter(encounter9);
 
         Address add10 = new Address("st10", "Community2", 2, "city1");
-        Person person10 = new Person("p10", 0, "female", add7);
+        Person person10 = new Person("Zarana Bhadricha", 0, "female", add7);
         VitalSigns newVS10 = new VitalSigns("PreSchooler", 26, 90, 130, 16, 36);
         PatientEncounter encounter10 = new PatientEncounter();
         PatientEncounterHistory eh10 = new PatientEncounterHistory();
@@ -330,7 +336,7 @@ public class MainClass {
         eh10.addEncounter(encounter10);
 
         Address add11 = new Address("st11", "Community2", 2, "city1");
-        Person person11 = new Person("p11", 0, "male", add11);
+        Person person11 = new Person("Rishabh Upadhye", 0, "male", add11);
         VitalSigns newVS11 = new VitalSigns("SchoolAge", 22, 80, 140, 25, 60);
         PatientEncounter encounter11 = new PatientEncounter();
         PatientEncounterHistory eh11 = new PatientEncounterHistory();
@@ -347,26 +353,7 @@ public class MainClass {
             System.out.println("Patient condition is normal, added to Person directory");
         }
         eh11.addEncounter(encounter11);
-        
-       /* Address add12 = new Address("st11", "Community2", 2, "city1");
-        Person person12 = new Person("p11", 0, "female", add11);
-        VitalSigns newVS12 = new VitalSigns("Adolescent", 22, 80, 99, 25, 60);
-        PatientEncounter encounter12 = new PatientEncounter();
-        PatientEncounterHistory eh12 = new PatientEncounterHistory();
-        personDir.addPerson(person12);
-        encounter12.setVs(newVS11);
-        encounter11.setPerson(person12);
-        if (!encounter11.isPatientNormal(newVS11)) {
-            Patient patient = new Patient();
-            patient.setEh(eh12);
-            patient.setPerson(person12);
-            patientDir.addPatient(patient);
-            System.out.println("Patient condition is abnormal, added to Patient directory");
-        } else {
-            System.out.println("Patient condition is normal, added to Person directory");
-        }
-        eh11.addEncounter(encounter12);*/
-        
+  
     }
 }
 
