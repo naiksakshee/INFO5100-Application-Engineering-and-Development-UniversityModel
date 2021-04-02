@@ -7,7 +7,13 @@ import Business.EcoSystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 
+/**
+ *
+ * @author  raunak
+ */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
@@ -15,13 +21,19 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private Restaurant restaurant;
 
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecoSystem) {
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecoSystem=ecoSystem;
-        
-//        valueLabel.setText(Restaurant.getName());
-        
+        this.ecoSystem = ecoSystem;
+         ArrayList<Restaurant> rlist = ecoSystem.getRestaurantDirectory().getRestaurentList();
+         for (Restaurant res: rlist) {
+             UserAccount userAccount = res.getUserAccount();
+             if(userAccount.getUsername().equals(account.getUsername())) {
+                 this.restaurant = res;
+                 valueLabel.setText(restaurant.getRestaurentName());
+             }
+         }
+        //valueLabel.setText(restaurant.getRestaurentName());
     }
     
     /** This method is called from within the constructor to
@@ -38,45 +50,48 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("My Work Area -Adminstrative Role");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel1.setText("Admin");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 90, -1));
 
+        manageEmployeeJButton.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         manageEmployeeJButton.setText("Manage menu");
         manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageEmployeeJButtonActionPerformed(evt);
             }
         });
-        add(manageEmployeeJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 150, -1));
+        add(manageEmployeeJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 150, -1));
 
+        manageOrganizationJButton.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         manageOrganizationJButton.setText("Manage Orders");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageOrganizationJButtonActionPerformed(evt);
             }
         });
-        add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 150, -1));
+        add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, -1));
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         enterpriseLabel.setText("Restaurant :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 120, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 120, 30));
 
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
-       ManageMenuJPanel manageMenuJPanel = new ManageMenuJPanel(userProcessContainer,ecoSystem, restaurant);
+       ManageMenuJPanel manageMenuJPanel = new ManageMenuJPanel(userProcessContainer, ecoSystem, restaurant);
        userProcessContainer.add("manageMenuJPanel", manageMenuJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-        ManageOrdersJPanel manageOrdersJPanel = new ManageOrdersJPanel(userProcessContainer,ecoSystem, restaurant);
+       ManageOrdersJPanel manageOrdersJPanel = new ManageOrdersJPanel(userProcessContainer,ecoSystem, restaurant);
        userProcessContainer.add("manageOrdersJPanel", manageOrdersJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
        layout.next(userProcessContainer);

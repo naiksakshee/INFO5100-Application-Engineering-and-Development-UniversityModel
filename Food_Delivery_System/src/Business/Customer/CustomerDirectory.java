@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Business.Customer;
 
 import Business.UserAccount.UserAccount;
@@ -23,7 +19,11 @@ public class CustomerDirectory {
         this.customerList = customerList;
     }
     
-    public Customer createCustomer(String name, String address, int phoneNumber, UserAccount userAccount){
+     public void deleteCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
+     
+        public Customer createCustomer(String name, String address, int phoneNumber, UserAccount userAccount){
         Customer c = new Customer();
         c.setCustName(name);
         c.setCustAddress(address);
@@ -32,10 +32,5 @@ public class CustomerDirectory {
         customerList.add(c);  
         return c;
     }
-    
-     public void deleteCustomer(Customer customer) {
-        customerList.remove(customer);
-    }
-    
     
 }

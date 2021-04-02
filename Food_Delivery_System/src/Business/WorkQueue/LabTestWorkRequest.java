@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Business.WorkQueue;
 
 public class LabTestWorkRequest extends WorkRequest{
-    
+ 
     private String testResult;
 
     public String getTestResult() {
@@ -16,5 +13,6 @@ public class LabTestWorkRequest extends WorkRequest{
         this.testResult = testResult;
     }
     
+   
     
 }

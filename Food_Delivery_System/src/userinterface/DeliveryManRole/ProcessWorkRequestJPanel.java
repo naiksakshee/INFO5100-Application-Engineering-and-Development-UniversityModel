@@ -9,6 +9,11 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
 
+/**
+ *
+ * @author raunak
+ */
+
 
 public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
@@ -36,6 +41,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         resultJTextField = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 204, 153));
 
         submitJButton.setText("Submit Result");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +100,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         DeliveryManWorkAreaJPanel dwjp = (DeliveryManWorkAreaJPanel) component;
-        dwjp.populateTable();
+        //dwjp.populateTable();
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

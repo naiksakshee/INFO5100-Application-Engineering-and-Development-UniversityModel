@@ -1,18 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Business.WorkQueue;
 
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 
-
 public abstract class WorkRequest {
-
+    private String id;
     private String message;
+    // customer
     private UserAccount sender;
+    //delivery
     private UserAccount receiver;
+    
     private String status;
     private Date requestDate;
     private Date resolveDate;
@@ -67,5 +66,12 @@ public abstract class WorkRequest {
 
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
+    }
+     public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

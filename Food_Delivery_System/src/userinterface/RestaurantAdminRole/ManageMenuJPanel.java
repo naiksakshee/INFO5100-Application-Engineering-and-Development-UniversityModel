@@ -10,10 +10,14 @@ import Business.Restaurant.Restaurant;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-
-public class ManageMenuJPanel extends javax.swing.JPanel {
+/**
+ *
+ * @author abhilash
+ */
+    public class ManageMenuJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageMenuJPanel
@@ -21,26 +25,21 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     private EcoSystem ecoSystem;
     private Restaurant restaurant;
-    public ManageMenuJPanel(JPanel userProcessContainer, EcoSystem ecoSystem,Restaurant restaurant) {
+    ArrayList<String> menulist;
+    public ManageMenuJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, Restaurant restaurant) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecoSystem=ecoSystem;
-        this.restaurant=restaurant;
-        
-        //populateTable();
+        this.ecoSystem = ecoSystem;
+        this.restaurant = restaurant;
+        if (restaurant.getMenulist()!= null && !restaurant.getMenulist().isEmpty()) {
+            this.menulist = restaurant.getMenulist();
+                    populateTable();
+        } else {
+            this.menulist = new ArrayList<>();
+        }
+
     }
     
-    public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel) menuTable.getModel();
-
-        model.setRowCount(0);
-            for (String menu : restaurant.getMenulist()) {
-                Object[] row = new Object[2];
-                row[0] = menu;
- 
-                model.addRow(row);
-                }  
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,8 +55,11 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         menuTable = new javax.swing.JTable();
         newMenuTextField = new javax.swing.JTextField();
         addMenuBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        btnBack.setText("<- Back");
+        setBackground(new java.awt.Color(255, 204, 153));
+
+        btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -89,44 +91,56 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(menuTable);
 
-        addMenuBtn.setText("Add");
+        newMenuTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMenuTextFieldActionPerformed(evt);
+            }
+        });
+
+        addMenuBtn.setText("Add >>");
         addMenuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addMenuBtnActionPerformed(evt);
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/RestaurantAdminRole/icons8-organic-food-48.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnBack))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(18, 18, 18)
                         .addComponent(newMenuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(addMenuBtn)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addComponent(addMenuBtn)
+                        .addGap(214, 214, 214))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(328, 328, 328))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newMenuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addMenuBtn))
-                .addContainerGap(242, Short.MAX_VALUE))
+                    .addComponent(addMenuBtn)
+                    .addComponent(btnBack))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,14 +155,37 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+     public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) menuTable.getModel();
+        model.setRowCount(0);
+            for (String menu : restaurant.getMenulist()) {
+                Object[] row = new Object[2];
+                row[0] = menu;
+                model.addRow(row);
+            }  
+    }
     private void addMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMenuBtnActionPerformed
         // TODO add your handling code here:
+        String newItem = newMenuTextField.getText();
+        System.out.println(restaurant.getPhoneNumber());
+        
+        menulist.add(newItem);
+        restaurant.setMenulist(menulist);
+//      restaurant.addMenu(newItem);
+      populateTable();
+        
+        
     }//GEN-LAST:event_addMenuBtnActionPerformed
+
+    private void newMenuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newMenuTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMenuBtn;
     private javax.swing.JButton btnBack;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable menuTable;
     private javax.swing.JTextField newMenuTextField;

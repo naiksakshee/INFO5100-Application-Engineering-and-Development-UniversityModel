@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author abhilash
+ */
 public class ManageCustomersJPanel extends javax.swing.JPanel {
 
     /**
@@ -66,6 +70,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         txtCustPass = new javax.swing.JPasswordField();
         saveBtn = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 204, 153));
 
         custJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

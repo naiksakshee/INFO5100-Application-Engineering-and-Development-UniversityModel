@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Business.Restaurant;
 
 import Business.Customer.Customer;
@@ -25,6 +21,17 @@ public class RestaurantDirectory {
     }
     
     public Restaurant createRestaurant(String restName, String restMan, int phoneNumber, String address, UserAccount userAccount){
+        Restaurant r = new Restaurant();
+        r.setRestaurentName(restName);
+        r.setRestaurentManager(restMan);
+        r.setPhoneNumber(phoneNumber);
+        r.setAddress(address);
+        r.setUserAccount(userAccount);
+        restaurentList.add(r);  
+        return r;
+    }
+    
+    public Restaurant updateRestaurant(String restName, String restMan, int phoneNumber, String address, UserAccount userAccount){
         Restaurant r = new Restaurant();
         r.setRestaurentName(restName);
         r.setRestaurentManager(restMan);
